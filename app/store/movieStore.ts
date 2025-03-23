@@ -1,14 +1,24 @@
-import { create } from 'zustand'
+import { createStore } from 'zustand/vanilla'
 
-interface MovieStore {
+export interface MovieStore {
   movies: Movie[]
   setMovies: (movies: Movie[]) => void
+
+  isLoading: boolean
+  setIsLoading: (isLoading: boolean) => void
 }
 
-const useMovieStore = create<MovieStore>(set => ({
+export const defaultInitState = {
   movies: [],
-
-  setMovies: movies => set({ movies }),
-}))
-
-export default useMovieStore
+  isLoading: false,
+}
+export const createMovieStore = (initState = defaultInitState) => {
+  return createStore<MovieStore>()(set => ({
+    ...initState,
+    setMovies: movies => set({ movies }),
+    setIsLoading: isLoading =>
+      set({
+        isLoading,
+      }),
+  }))
+}

@@ -1,11 +1,14 @@
 'use client'
 
-import useMovieStore from '@/store/movieStore'
+import { useMovieStore } from '@/store/movie-store-provider'
 import Link from 'next/link'
 import Image from 'next/image'
+import LoadingPage from '@/loading'
 
 export default function MovieList() {
-  const { movies } = useMovieStore()
+  const { movies, isLoading } = useMovieStore(state => state)
+
+  if (isLoading) return <LoadingPage />
 
   if (!movies.length)
     return (
@@ -13,6 +16,7 @@ export default function MovieList() {
         No movies found. Try searching for something.
       </div>
     )
+
   return (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
       {movies.map(movie => (
