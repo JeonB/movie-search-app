@@ -55,23 +55,25 @@ export default function MovieDetail({
               <div className="mt-4">
                 <div className="flex items-center">
                   <span className="mr-1 text-yellow-500">★</span>
-                  <span>{movie.imdbRating}/10</span>
+                  <span className="text-gray-600">{movie.imdbRating}/10</span>
                 </div>
 
                 <p className="mt-2">
-                  <span className="font-semibold">Director:</span>{' '}
-                  {movie.Director}
+                  <span className="font-semibold text-gray-600">Director:</span>
+                  <span className="text-neutral-400"> {movie.Director}</span>
                 </p>
                 <p className="mt-1">
-                  <span className="font-semibold">Cast:</span> {movie.Actors}
+                  <span className="font-semibold text-gray-600">Cast:</span>
+                  <span className="text-neutral-400"> {movie.Actors}</span>
                 </p>
                 <p className="mt-1">
-                  <span className="font-semibold">Genre:</span> {movie.Genre}
+                  <span className="font-semibold text-gray-600">Genre:</span>
+                  <span className="text-neutral-400"> {movie.Genre}</span>
                 </p>
 
                 <div className="mt-4">
-                  <h2 className="text-lg font-semibold">Plot</h2>
-                  <p className="mt-2 text-gray-600">{movie.Plot}</p>
+                  <h2 className="text-lg font-semibold text-gray-600">Plot</h2>
+                  <p className="mt-2 text-neutral-400">{movie.Plot}</p>
                 </div>
               </div>
             </div>

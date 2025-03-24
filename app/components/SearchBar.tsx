@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useMovieStore } from '../store/movie-store-provider'
 import { useQuery } from '@tanstack/react-query'
 import { searchMovies } from '@/lib/fetchData'
@@ -10,23 +10,23 @@ export default function SearchBar() {
   const [searchTerm, setSearchTerm] = useState('')
   const { setMovies, setIsLoading } = useMovieStore(state => state)
 
-  const { data, isLoading } = useQuery<Movie[]>({
+  const fetchMovies = async (searchTerm: string) => {
+    setIsLoading(true)
+    const movies = await searchMovies(searchTerm)
+    setMovies(movies)
+    setIsLoading(false)
+    return movies
+  }
+
+  useQuery<Movie[]>({
     queryKey: ['movies', searchTerm],
-    queryFn: () => searchMovies(searchTerm),
+    queryFn: () => fetchMovies(searchTerm),
     enabled: !!searchTerm,
     staleTime: 5 * 1000,
   })
 
-  useEffect(() => {
-    setIsLoading(isLoading)
-    if (data) {
-      setMovies(data)
-    }
-  }, [data, isLoading, setIsLoading, setMovies])
-
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
-    setIsLoading(true)
     setSearchTerm(inputValue)
   }
 

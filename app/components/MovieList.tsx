@@ -35,12 +35,14 @@ export default function MovieList() {
               />
             ) : (
               <div className="flex h-full items-center justify-center bg-gray-200">
-                <span className="text-gray-500">No image available</span>
+                <span className="text-neutral-300">No image available</span>
               </div>
             )}
           </div>
           <div className="p-4">
-            <h3 className="truncate text-lg font-semibold">{movie.Title}</h3>
+            <h3 className="truncate text-lg font-semibold text-gray-600">
+              {movie.Title}
+            </h3>
             <p className="text-gray-600">{movie.Year}</p>
           </div>
         </Link>
